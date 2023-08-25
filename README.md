@@ -1,2 +1,2 @@
-# WebTechnologies_ProjectS
+# WebTechnologies_My_Projects
 college project
