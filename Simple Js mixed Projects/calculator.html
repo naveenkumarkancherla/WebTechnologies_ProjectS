@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Calculator</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center mb-3">
+              <input type="text" id="display" class="form-control" readonly>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('7')">7</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('8')">8</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('9')">9</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-warning btn-block" onclick="clearDisplay()">C</button>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('4')">4</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('5')">5</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('6')">6</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-warning btn-block" onclick="backspace()">←</button>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('1')">1</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('2')">2</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('3')">3</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary btn-block" onclick="appendOperator('+')">+</button>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('0')">0</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-secondary btn-block" onclick="appendNumber('.')">.</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary btn-block" onclick="appendOperator('-')">-</button>
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-primary btn-block" onclick="appendOperator('*')">*</button>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-6">
+                <button class="btn btn-primary btn-block" onclick="appendOperator('/')">/</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-success btn-block" onclick="calculate()">=</button>
+              </div>
+            </div>
+          </div>
+          <footer class="text-center mt-5 bg-secondary">
+            <p>All rights reserved &copy; 2023 Kancherla Naveenkumar</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let displayValue = "";
+
+    function updateDisplay() {
+      const display = document.getElementById("display");
+      display.value = displayValue;
+    }
+
+    function appendNumber(number) {
+      displayValue += number;
+      updateDisplay();
+    }
+
+    function appendOperator(operator) {
+      if (displayValue !== "" && !isNaN(displayValue[displayValue.length - 1])) {
+        displayValue += operator;
+        updateDisplay();
+      }
+    }
+
+    function backspace() {
+      displayValue = displayValue.slice(0, -1);
+      updateDisplay();
+    }
+
+    function clearDisplay() {
+      displayValue = "";
+      updateDisplay();
+    }
+
+    function calculate() {
+      try {
+        const result = eval(displayValue);
+        displayValue = result.toString();
+        updateDisplay();
+      } catch (error) {
+        displayValue = "Error";
+        updateDisplay();
+      }
+    }
+  </script>
+</body>
+</html>

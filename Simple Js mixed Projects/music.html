@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Music Player</title>
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Remove custom styles for .container, .audio and #metadata */
+    audio {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card bg-info">
+      <div class="card-body text-center">
+        <h1 class="card-title">Music Player</h1>
+        <audio id="audioPlayer" controls>
+          <source src="audio.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div id="metadata">
+          <h2>Ayyappa songs</h2>
+          <p>Artist: manikanta</p>
+          <p>Album: Sabarimala</p>
+        </div>
+      </div>
+      <footer class="text-center mt-5 bg-secondary">
+        <p>All rights reserved &copy; 2023 Kancherla Naveenkumar</p>
+      </footer>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const audioPlayer = document.getElementById('audioPlayer');
+    const metadataDiv = document.getElementById('metadata');
+
+    audioPlayer.addEventListener('loadedmetadata', function() {
+      metadataDiv.querySelector('h2').textContent = audioPlayer.title || 'Song Title';
+      metadataDiv.querySelector('p:nth-of-type(1)').textContent = 'Artist: ' + (audioPlayer.artist || 'Manikanta');
+      metadataDiv.querySelector('p:nth-of-type(2)').textContent = 'Album: ' + (audioPlayer.album || 'Sabarimala');
+    });
+  </script>
+</body>
+</html>

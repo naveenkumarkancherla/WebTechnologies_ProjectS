@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title">Task Manager</h1>
+        <div class="input-group mb-3">
+          <input type="text" id="taskInput" class="form-control" placeholder="Enter your task here">
+          <div class="input-group-append">
+            <button class="btn btn-primary" onclick="addTask()">Add Task</button>
+          </div>
+        </div>
+
+        <ul id="taskList" class="list-group"></ul>
+      </div>
+      <footer class="text-center mt-5 bg-secondary">
+        <p>All rights reserved &copy; 2023 Kancherla Naveenkumar</p>
+      </footer>
+    </div>
+  </div>
+  
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskText = taskInput.value.trim();
+
+      if (taskText === '') {
+        alert('Please enter a valid task.');
+        return;
+      }
+
+      const taskList = document.getElementById('taskList');
+      const taskId = new Date().getTime();
+      const taskItem = `
+        <li data-task-id="${taskId}" class="list-group-item">
+          <input type="checkbox" onchange="toggleTaskStatus(${taskId})">
+          <span>${taskText}</span>
+          <button class="btn btn-danger btn-sm float-right" onclick="deleteTask(${taskId})">Delete</button>
+        </li>
+      `;
+
+      taskList.insertAdjacentHTML('beforeend', taskItem);
+      taskInput.value = '';
+
+      updateLocalStorage();
+    }
+
+    function toggleTaskStatus(taskId) {
+      const taskItem = document.querySelector(`[data-task-id="${taskId}"]`);
+      const taskText = taskItem.querySelector('span');
+      taskText.classList.toggle('completed');
+
+      updateLocalStorage();
+    }
+
+    function deleteTask(taskId) {
+      const taskItem = document.querySelector(`[data-task-id="${taskId}"]`);
+      taskItem.remove();
+
+      updateLocalStorage();
+    }
+
+    function updateLocalStorage() {
+      const taskList = document.getElementById('taskList').innerHTML;
+      localStorage.setItem('tasks', taskList);
+    }
+
+    function loadTasksFromLocalStorage() {
+      const taskList = document.getElementById('taskList');
+      const tasks = localStorage.getItem('tasks');
+
+      if (tasks) {
+        taskList.innerHTML = tasks;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadTasksFromLocalStorage);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

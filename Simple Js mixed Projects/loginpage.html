@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign In / Sign Up</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .card.sign-in {
+      border: 5px solid #4b0101; 
+    }
+
+    .card.sign-up {
+      border: 5px solid #05f005; 
+    }
+    .moving-image {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    body {
+      background-image: url('back.avif');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body>
+    <marquee style="font-family: Georgia, serif; font-size: 35px; color: #f99b03;" behavior="scroll" direction="left">
+        This is my Javascript Project using js,html,css,bootstrap...
+    </marquee>
+    <div class="moving-image">
+      <img src="myproj.png" alt="Moving Image">
+    </div>
+
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <div class="card sign-in">
+          <div class="card-body">
+            <h2 class="card-title">Sign In</h2>
+            <form id="signin-form">
+              <div class="form-group">
+                <label for="signin-email">Email</label>
+                <input type="email" id="signin-email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <p id="signin-message" class="mt-2" style="display: none;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6 offset-md-3">
+        <div class="card sign-up">
+          <div class="card-body">
+            <h2 class="card-title">Sign Up</h2>
+            <form id="signup-form">
+              <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" class="form-control" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <p id="signup-message" class="mt-2" style="display: none;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const signinForm = document.getElementById('signin-form');
+      const signinEmail = document.getElementById('signin-email');
+      const signinPassword = document.getElementById('signin-password');
+      const signinMessage = document.getElementById('signin-message');
+      const signupForm = document.getElementById('signup-form');
+      const signupEmail = document.getElementById('signup-email');
+      const signupPassword = document.getElementById('signup-password');
+      const signupMessage = document.getElementById('signup-message');
+
+      function showSuccessMessage(messageElement, message) {
+        messageElement.textContent = message;
+        messageElement.style.color = 'green';
+        messageElement.style.display = 'block';
+      }
+
+      function showFailureMessage(messageElement, message) {
+        messageElement.textContent = message;
+        messageElement.style.color = 'red';
+        messageElement.style.display = 'block';
+      }
+
+      signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = signupEmail.value.trim();
+        const password = signupPassword.value.trim();
+
+        // Check if the user already exists in Local Storage
+        if (localStorage.getItem(email)) {
+          showFailureMessage(signupMessage, 'User already exists. Please sign in.');
+        } else {
+          // Register the user by storing email and password in Local Storage
+          localStorage.setItem(email, password);
+
+          showSuccessMessage(signupMessage, 'Sign up successful! Please sign in.');
+
+          signupEmail.value = '';
+          signupPassword.value = '';
+        }
+      });
+
+      signinForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = signinEmail.value.trim();
+        const password = signinPassword.value.trim();
+
+        // Check if the user exists and the password matches the stored password
+        if (localStorage.getItem(email) === password) {
+          showSuccessMessage(signinMessage, 'Sign in successful! Redirecting...');
+          // Redirect to "PROJECT.html" after successful sign-in
+          setTimeout(() => {
+            window.location.href = 'PROJECT.html';
+          }, 2000);
+        } else {
+          showFailureMessage(signinMessage, 'Sign in failed. Please check your email and password.');
+        }
+      });
+    });
+  </script>
+  <footer class="bg-dark text-light text-center py-3">
+    <p>&copy; 2023 Naveenkumar Naidu. All rights reserved.</p>
+  </footer>
+</body>
+</html>
