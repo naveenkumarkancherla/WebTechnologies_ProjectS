@@ -1,0 +1,105 @@
+  body {
+    font-family: "Arial", sans-serif;
+  }
+  .btn:hover {
+    background-color: hsl(107, 94%, 19%); 
+  }
+  a {
+    color: #ece8e8;
+    text-decoration: none;
+  }  
+  .background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  #backgroundVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .showcase::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: inset 120px 100px 250px #000, inset -120px -100px 250px #000;
+  }
+  .showcase-top {
+    position: relative;
+    height: 100px;
+    z-index: 2;
+  }
+  .showcase-top img {
+    width: 180px;
+    height:90px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+  }
+  .showcase-top a {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+  }
+  .showcase-content {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 9rem;
+    z-index: 2;
+  }
+  .showcase-content h1 {
+    color:rgb(238, 241, 4);
+    font-weight: 600;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 3.1rem;
+    line-height: 1.1;
+    margin: 0 0 2rem 0;
+  }
+  
+  .showcase-content p {
+    color: rgb(11, 227, 242);
+    font-weight: 400;
+    font-size: 1.5rem;
+  }  
+  .footer {
+    max-width: 90%;
+    margin: 1rem auto;
+    overflow: auto;
+  }
+  .footer .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+.modal-header {
+    background-color: #343a40;
+    color: #fff;
+    border-bottom: none;
+    text-align: center;
+}
+
+.modal-header img {
+    display: block;
+    margin: 0 auto;
+    padding-top:25px;
+    padding-bottom:25px;
+}
+
