@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Movies - Netflix Clone</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+footer {
+    background-color: #111;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .netflix-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+}
+
+footer .social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+footer .social-icons a {
+    display: inline-block;
+    margin: 0 8px;
+    color: #fff;
+}
+
+footer .social-icons i {
+    font-size: 24px;
+}
+body {
+    background: url("background.gif") no-repeat center center/cover;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Netflix Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TV Shows</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Movies"
+                            aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<br><br>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="back.gif" class="card-img-top" alt="Movie 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 1</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie2.gif" class="card-img-top" alt="Movie 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 2</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie3.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 3</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie4.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 4</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie5.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 5</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie6.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 6</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie7.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 7</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie8.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 8</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <a href="#">
+                        <div class="card movie">
+                            <img src="movie.gif" class="card-img-top" alt="Movie 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Movie 9</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <img class="netflix-logo" src="logo.png" alt="Netflix Logo">
+    
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">TV Shows</a>
+            <a href="#">Movies</a>
+            <a href="#">Contact Us</a>
+        </nav>
+    
+        <p>&copy; 2023 Netflix Clone. All rights reserved.</p>
+    
+        <div class="social-icons">
+            <a href="#" title="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" title="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        In this example, we included the Netflix logo, navigation links, and some optional social media icons in the footer. The actual Netflix footer may include additional links, legal information, privacy policy, and other elements, which you can modify and expand based on your needs.
+    
+        To use the social media icons (e.g., Facebook, Twitter, Instagram), make sure you include the corresponding FontAwesome icons in your project. You can find the icon library link in the head section of your HTML or add the icons using a local copy of the library.
+        
+        Remember that the appearance of the Netflix footer may change over time, so consider regularly checking the Netflix website for any design updates and adjust your clone accordingly.
+        
+    </footer>
+    
+   
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
