@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .card {
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-transaction {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 5px;
+    }
+
+    button {
+      padding: 5px 10px;
+    }
+
+    #transactionList {
+      text-align: left;
+    }
+
+    .total-expense {
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Expense Tracker</h1>
+      <div class="add-transaction">
+        <input type="text" id="transactionDescription" placeholder="Description">
+        <input type="number" id="transactionAmount" placeholder="Amount">
+        <button class="btn btn-primary" onclick="addTransaction()">Add Transaction</button>
+      </div>
+      <div id="transactionList"></div>
+      <div class="total-expense" id="totalExpense">Total Expense: ₹0</div>
+      <footer class="text-center mt-5 bg-secondary">
+        <p>All rights reserved &copy; 2023 Kancherla Naveenkumar</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    let transactions = [];
+
+    function addTransaction() {
+      const description = document.getElementById('transactionDescription').value;
+      const amount = parseFloat(document.getElementById('transactionAmount').value);
+
+      if (description.trim() === '' || isNaN(amount)) {
+        alert('Please enter a valid description and amount.');
+        return;
+      }
+
+      const transaction = {
+        description: description,
+        amount: amount,
+      };
+
+      transactions.push(transaction);
+      displayTransactions();
+
+      document.getElementById('transactionDescription').value = '';
+      document.getElementById('transactionAmount').value = '';
+    }
+
+    function displayTransactions() {
+      const transactionListDiv = document.getElementById('transactionList');
+      transactionListDiv.innerHTML = '';
+      let totalExpense = 0;
+
+      transactions.forEach((transaction) => {
+        const transactionDiv = document.createElement('div');
+        transactionDiv.textContent = `${transaction.description}: ₹${transaction.amount}`;
+        transactionListDiv.appendChild(transactionDiv);
+
+        totalExpense += transaction.amount;
+      });
+
+      const totalExpenseDiv = document.getElementById('totalExpense');
+      totalExpenseDiv.textContent = `Total Expense: ₹${totalExpense}`;
+    }
+  </script>
+</body>
+</html>
+
