@@ -39,17 +39,16 @@
             <div class="col-lg-6 mt-10">
                 <div class="card">
                     <div class="card-header text-center">
-                        <a href="index.html"><img src="logo.png" height="160" width="190" alt="WatchHaven logo"></a>
-                        <h3 style='font-weight:500; font-size:35px;'>Sign In</h3>
+                            <a href="index.html"><img src="logo.png" height="160" width="190" alt="WatchHaven logo"></a>
+                        <h style='font-weight:500; font-size:35px ;'>Sign In</h3>
                     </div>
 
                     <div class="card-body p-4 bg-secondary">
-                        <form id="form" action="signin.php" method="post">
+                        <form  id="form" action="signin.php" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="bi-person-circle"></i></span>
                                 <div class="form-floating flex-grow-1">
                                     <input type="email" class="form-control" name="uemail" id="uemail" placeholder="Email address" required>
-                                    <span id="emailError"></span>
                                     <label for="uemail">Email address</label>
                                 </div>
                             </div>
@@ -57,13 +56,12 @@
                                 <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                 <div class="form-floating flex-grow-1">
                                     <input type="password" class="form-control" id="passInput" placeholder="Enter password" name="password" required>
-                                    <span id="passwordError"></span>
                                     <label for="passInput">Password</label>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <input type="submit" class="btn btn-success" name="submit" value="Log In">
-                                <a class="btn btn-danger" style="font-size:16px;" href="signup.html">Sign Up <i class="fa fa-arrow-right"></i></a>
+                                <a class="btn btn-danger" style="font-size:16px;" href="signup.html">SignUp <i class="fa fa-arrow-right"></i></a>
                             </div>
                         </form>
                     </div>
@@ -71,69 +69,5 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const emailInput = document.getElementById('uemail');
-            const emailError = document.getElementById('emailError');
-            const passwordInput = document.getElementById('passInput');
-            const passwordError = document.getElementById('passwordError');
-
-            // Email validation
-            emailInput.addEventListener('input', function () {
-                const emailValue = emailInput.value.trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailValue)) {
-                    emailError.innerHTML = '<p style="color:red"><b>Please enter a valid email address.</b></p>';
-                    emailInput.style.border = '2px solid red';
-                } else {
-                    emailError.innerHTML = '';
-                    emailInput.style.border = '2px solid green';
-                }
-            });
-
-            // Password validation
-            passwordInput.addEventListener('input', function () {
-                const passwordValue = passwordInput.value.trim();
-                if (passwordValue.length < 6) {
-                    passwordError.innerHTML = '<p style="color:red"><b>Password must be at least 6 characters long.</b></p>';
-                    passwordInput.style.border = '2px solid red';
-                } else {
-                    passwordError.innerHTML = '';
-                    passwordInput.style.border = '2px solid green';
-                }
-            });
-
-            const form = document.getElementById('form');
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                if (validateForm()) {
-                    form.submit();
-                }
-            });
-
-            function validateForm() {
-                const emailValue = emailInput.value.trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailValue)) {
-                    emailError.innerHTML = '<p style="color:red"><b>Please enter a valid email address.</b></p>';
-                    emailInput.style.border = '5px solid red';
-                    return false;
-                } else {
-                    emailInput.style.border = '5px solid green';
-                }
-
-                const passwordValue = passwordInput.value.trim();
-                if (passwordValue.length < 6) {
-                    passwordError.innerHTML = '<p style="color:red"><b>Password must be at least 6 characters long.</b></p>';
-                    passwordInput.style.border = '5px solid red';
-                    return false;
-                } else {
-                    passwordInput.style.border = '5px solid green';
-                }
-
-                return true;
-            }
-        });
-    </script>
 </body>
 </html>
