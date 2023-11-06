@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body style="background-image: url('naveenfashions1.gif'); background-size: cover;">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <img src="naveenfashions2.png"
+                        height="150" width="150" class="w-100"
+                        style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration</h3>
+                        <form class="mx-1 mx-md-4" action="index.php" id="form" method="POST">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <div class="form-floating flex-grow-1">
+                                    <input type="text" class="form-control" name="uname" id="uname"
+                                        placeholder="Username">
+                                    <label for="uname">Username</label>
+                                </div>
+                            </div>
+                            <span id="nameErr"></span>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <div class="form-floating flex-grow-1">
+                                    <input type="email" class="form-control" id="mail" placeholder="Enter email"
+                                        name="email">
+                                    <label for="mail">Email address</label>
+                                </div>
+                            </div>
+                            <span id="mailErr"></span>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <div class="form-floating flex-grow-1">
+                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                        name="pswd">
+                                    <label for="pwd">Password</label>
+                                </div>
+                            </div>
+                            <span id="passErr"></span>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <div class="form-floating flex-grow-1">
+                                    <input type="password" class="form-control" id="cpwd"
+                                        placeholder="Confirm password" name="cpswd">
+                                    <label for="cpwd">Confirm password</label>
+                                </div>
+                            </div>
+                            <span id="cpassErr"></span>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">+91</span>
+                                <div class="form-floating flex-grow-1">
+                                    <input type="tel" class="form-control" name="phone" id="phone"
+                                        placeholder="Phone number">
+                                    <label for="phone">Phone number</label>
+                                </div>
+                            </div>
+                            <span id="phoneErr"></span>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something">
+                                <label class="form-check-label">I accept the <a href="#">Terms of Use</a> &amp;
+                                    <a href="#">Privacy Policy</a></label>
+                            </div>
+                            <span id="checkErr"></span>
+
+                            <div class="text-center">
+                                <input type="submit" value="REGISTER" class="btn btn-primary">
+                                <input type="reset" class="btn btn-primary" value="RESET">
+                            </div>
+                        </form>
+                        <div class="text-center">Already have an account? <a href="login.html">Sign in</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let form = document.getElementById('form');
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            validate();
+        });
+
+        function validate() {
+            let name = document.getElementById("uname").value.trim();
+            let password = document.getElementById("pwd").value.trim();
+            let cpassword = document.getElementById("cpwd").value.trim();
+            let is_checked = document.getElementById("check1").checked;
+            let mail = document.getElementById("mail").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+
+            let nameValid = true;
+            let passwordValid = true;
+            let mailValid = true;
+            let phoneValid = true;
+
+
+            let nameres = document.getElementById('nameErr');
+            let upassword = document.getElementById('passErr');
+            let cpd = document.getElementById('cpassErr');
+            let check = document.getElementById('checkErr');
+            let mailErr = document.getElementById('mailErr');
+            let phoneErr = document.getElementById('phoneErr');
+
+            //name validation
+            if (name == "") {
+                nameres.innerText = "Name cannot be null";
+                nameValid = false;
+            } else if (name.length < 3) {
+                nameres.innerText = "At least should contain 3 letters";
+                nameValid = false;
+            } else if (!name.match(/[a-zA-Z]/)) {
+                nameres.innerText = "Name should not have numbers";
+                nameValid = false;
+            } else if (name.match(/[0-9]/)) {
+                nameres.innerText = "Numbers not allowed in name";
+                nameValid = false;
+            } else {
+                nameres.innerText = "";
+            }
+
+            //mail validation
+            if (mail == "") {
+                mailErr.innerText = "Email is required";
+                mailValid = false;
+            } else if (!mail.match(/([a-z A-Z 0-9]+)([@])([a-z]+)([\.]([a-z]{3,6}))/)) {
+                mailErr.innerText = "Invalid email";
+                mailValid = false;
+            } else {
+                mailErr.innerText = "";
+            }
+
+            //password validation
+            if (password == "") {
+                upassword.innerText = "Password cannot be empty";
+                passwordValid = false;
+            } else if (password.length < 8) {
+                upassword.innerText = "Password should contain at least 8 characters";
+                passwordValid = false;
+            } else if (!password.match(/[a-z]/)) {
+                upassword.innerText = "At least one lowercase letter required in password";
+                passwordValid = false;
+            } else if (!password.match(/[A-Z]/)) {
+                upassword.innerText = "At least one uppercase letter required in password";
+                passwordValid = false;
+            } else if (!password.match(/[0-9]/)) {
+                upassword.innerText = "At least one number required in password";
+                passwordValid = false;
+            } else if (!password.match(/[$#@_.]/)) {
+                upassword.innerText = "At least one special character required in password";
+                passwordValid = false;
+            } else {
+                upassword.innerText = "";
+            }
+
+            //confirm password validation
+            if (password != cpassword) {
+                cpd.innerText = "Password does not match";
+                passwordValid = false;
+            } else if (cpassword == "") {
+                cpd.innerText = "Confirm password cannot be empty";
+                passwordValid = false;
+            } else {
+                cpd.innerText = "";
+            }
+
+            //phone validation
+            if (phone == "") {
+                phoneErr.innerText = "Phone number is mandatory";
+                phoneValid = false;
+            } else if (isNaN(phone)) {
+                phoneErr.innerText = "Phone number must contain numbers only";
+                phoneValid = false;
+            } else {
+                phoneErr.innerText = "";
+            }
+
+            //checkbox validation
+            if (!is_checked) {
+                check.innerHTML = "Please agree to the Terms of Use and Privacy Policy to Register";
+                return;
+            } else {
+                check.innerHTML = "";
+            }
+
+            // Final form submission
+            if (nameValid && passwordValid && mailValid && phoneValid) {
+                form.submit();
+            }
+        }
+    </script>
+</body>
+
+</html>

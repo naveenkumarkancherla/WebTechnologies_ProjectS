@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML TODO List | Major project</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <button id="addTaskBtn">Add Task</button>
+    <table id="taskList">
+        <!-- Task list table goes here -->
+    </table>
+
+    <div id="addTaskModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Task</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="taskDescription" class="form-control" placeholder="Task Description">
+                    <input type="text" id="responsible" class="form-control" placeholder="Responsible">
+                    <input type="text" id="eta" class="form-control" placeholder="ETA">
+                </div>
+                <div class="modal-footer">
+                    <button id="addTaskModalBtn" class="btn btn-primary">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const taskList = $('#taskList');
+            const taskDescriptionInput = $('#taskDescription');
+            const responsibleInput = $('#responsible');
+            const etaInput = $('#eta');
+            let taskCounter = 1;
+            let currentEditingRow = null;
+
+            // Function to fetch tasks from the database (replace 'get_tasks.php' with your actual endpoint)
+            function fetchTasks() {
+                $.get('get_tasks.php', function (tasks) {
+                    if (tasks.length > 0) {
+                        taskList.html('');
+                        taskCounter = 1;
+                        tasks.forEach(task => {
+                            const newRow = `
+                                <tr>
+                                    <td>${taskCounter}</td>
+                                    <td>${task.taskDescription}</td>
+                                    <td>${task.responsible}</td>
+                                    <td>${task.eta}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit-btn">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm update-btn">
+                                            <i class="bi bi-check"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm delete-btn">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>`;
+                            taskList.append(newRow);
+                            taskCounter++;
+                        });
+                    } else {
+                        taskList.html('<tr><td colspan="5">Tasks are empty.</td></tr>');
+                    }
+                });
+            }
+
+            // Fetch tasks when the page loads
+            fetchTasks();
+
+            $('#addTaskBtn').click(function () {
+                resetTaskForm();
+                currentEditingRow = null;
+            });
+
+            $('#addTaskModalBtn').click(function () {
+                const taskDescription = taskDescriptionInput.val();
+                const responsible = responsibleInput.val();
+                const eta = etaInput.val();
+
+                if (taskDescription && responsible && eta) {
+                    if (currentEditingRow) {
+                        const taskId = currentEditingRow.find('td:first').text();
+                        currentEditingRow.find('td:eq(1)').text(taskDescription);
+                        currentEditingRow.find('td:eq(2)').text(responsible);
+                        currentEditingRow.find('td:eq(3)').text(eta);
+                        updateTaskInDatabase(taskId, taskDescription, responsible, eta);
+                    } else {
+                        const newRow = `
+                            <tr>
+                                <td>${taskCounter}</td>
+                                <td>${taskDescription}</td>
+                                <td>${responsible}</td>
+                                <td>${eta}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm edit-btn">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-sm update-btn">
+                                        <i class="bi bi-check"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm delete-btn">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`;
+                        taskList.append(newRow);
+                        taskCounter++;
+                        addTaskToDatabase(taskDescription, responsible, eta);
+                    }
+
+                    $('#addTaskModal').modal('hide');
+                    resetTaskForm();
+                }
+            });
+
+            taskList.on('click', '.edit-btn', function () {
+                currentEditingRow = $(this).closest('tr');
+                const cells = currentEditingRow.find('td');
+                taskDescriptionInput.val(cells.eq(1).text());
+                responsibleInput.val(cells.eq(2).text());
+                etaInput.val(cells.eq(3).text);
+                $('#addTaskModal').modal('show');
+            });
+
+            function resetTaskForm() {
+                taskDescriptionInput.val('');
+                responsibleInput.val('');
+                etaInput.val('');
+            }
+
+            function addTaskToDatabase(taskDescription, responsible, eta) {
+                $.post('addtask.php', {
+                    taskDescription: taskDescription,
+                    responsible: responsible,
+                    eta: eta
+                }, function () {
+                    // Callback function after the task is added
+                });
+            }
+
+            function updateTaskInDatabase(taskId, taskDescription, responsible, eta) {
+                $.post('update_task.php', {
+                    taskId: taskId,
+                    taskDescription: taskDescription,
+                    responsible: responsible,
+                    eta: eta
+                }, function () {
+                    // Callback function after the task is updated
+                });
+            }
+
+            taskList.on('click', '.delete-btn', function () {
+                const taskId = $(this).closest('tr').find('td:first').text();
+                deleteTaskInDatabase(taskId, $(this));
+            });
+
+            function deleteTaskInDatabase(taskId, target) {
+                $.post('delete_task.php', {
+                    action: 'delete',
+                    taskId: taskId
+                }, function (result) {
+                    if (result === 'Task deleted successfully!') {
+                        if (currentEditingRow && currentEditingRow.find('td:first').text() === taskId) {
+                            resetTaskForm();
+                        }
+                        target.closest('tr').remove();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
