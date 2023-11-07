@@ -1,5 +1,6 @@
 
 # College BRANCH Management System
+@Naveen kumar Chowdary
 
 The College Management System is a MERN Stack-based system with three different login portals for students, faculty, and admin.
 
