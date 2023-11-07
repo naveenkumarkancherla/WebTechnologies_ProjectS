@@ -1,5 +1,5 @@
 
-# College Management System
+# College BRANCH Management System
 
 The College Management System is a MERN Stack-based system with three different login portals for students, faculty, and admin.
 
@@ -10,11 +10,6 @@ The College Management System is a MERN Stack-based system with three different 
 **Server:** Node, Express
 
 **Database:** MongoDB
-
-
-Youtube Link: https://www.youtube.com/watch?v=LY4UhPadZCs&ab_channel=KrishJotaniya
-
-Setup Link: https://www.youtube.com/watch?v=aR0E_UrCzMI&t=6s
 
 ## Student Features
 
